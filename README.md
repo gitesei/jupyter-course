@@ -101,6 +101,43 @@ Instructions for Windows:
    ```
 [Further Information](https://conda.io/docs/user-guide/tasks/manage-environments.html#creating-an-environment-from-an-environment-yml-file)
 
+## Troubleshooting
+
+If your notebook seems to have an issue on connection, similar to the lines below:
+
+   ```
+[E 12:18:57.001 NotebookApp] Uncaught exception in /api/kernels/5e16fa4b-3e35-4265-89b0-ab36bb0573f5/channels
+    Traceback (most recent call last):
+      File "/Library/Python/2.7/site-packages/tornado-5.0a1-py2.7-macosx-10.13-intel.egg/tornado/websocket.py", line 494, in _run_callback
+        result = callback(*args, **kwargs)
+      File "/Library/Python/2.7/site-packages/notebook-5.2.2-py2.7.egg/notebook/services/kernels/handlers.py", line 258, in open
+        super(ZMQChannelsHandler, self).open()
+      File "/Library/Python/2.7/site-packages/notebook-5.2.2-py2.7.egg/notebook/base/zmqhandlers.py", line 168, in open
+        self.send_ping, self.ping_interval, io_loop=loop,
+    TypeError: __init__() got an unexpected keyword argument 'io_loop'
+[I 12:18:58.021 NotebookApp] Adapting to protocol v5.1 for kernel 5e16fa4b-3e35-4265
+   ```
+You should either a) downgrade the package "tornado" b) change L178 of the file 
+
+```
+[your conda installation location]/miniconda3/envs/LUcompute/lib/python3.6/site-packages/notebook/base/zmqhandlers.py 
+```
+
+from 
+
+   ```
+                self.send_ping, self.ping_interval, io_loop=loop,
+   ```
+
+into
+
+   ```
+                self.send_ping, self.ping_interval,
+   ```
+
+
+https://stackoverflow.com/questions/48090119/jupyter-notebook-typeerror-init-got-an-unexpected-keyword-argument-io-l
+
 ## Project Work
 
 The project work consists of three steps:
