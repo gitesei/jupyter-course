@@ -71,7 +71,7 @@ If you have little experience with Python or shell programming, the following tw
 3. [Download](https://github.com/mlund/jupyter-course/archive/master.zip) the course material
    (this github repository) and unzip.
 4. Install and activate the `LUcompute` environment described by the file [`environment.yml`](/environment.yml)
-   by running the following in a terminal:
+   by running the following in a terminal (inside the jupyter-course directory where you should see [`environment.yml`](/environment.yml)): 
 
    ```bash
    conda env create -f environment.yml
